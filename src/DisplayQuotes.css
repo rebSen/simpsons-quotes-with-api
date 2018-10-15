@@ -1,0 +1,14 @@
+li {
+    font-size: 15px;
+    text-decoration: none;
+    list-style: none;
+    align-items: center;
+    font-style: italic;
+    width: 50vw;
+    
+
+}
+
+li.quoty {
+    font-size: 20px;
+}

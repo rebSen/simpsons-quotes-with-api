@@ -1,28 +1,51 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import  GenerateNewQuote  from  './GenerateNewQuote';
+import  DisplayQuotes   from  './DisplayQuotes';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+const firstImage = 
+  {
+   "quote": "Eat my shorts",
+   "character": "Bart Simspon",
+   "image" : "https://cdn.glitch.com/3c3ffadc-3406-4440-bb95-d40ec8fcde72%2FBartSimpson.png?1497567511638",
+   
   }
+
+  
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        quotee:firstImage,
+       
+    }
 }
 
-export default App;
+
+GetQuotee = () => { 
+  fetch("https://thesimpsonsquoteapi.glitch.me/quotes?count=10")
+  .then(response => response.json()) 
+  .then(data => {
+    this.setState({
+      quotee:data[0]});
+  });
+  console.log("oula",this.state.quotee);
+} 
+  
+
+  render() {
+
+    
+    console.log("oula",this.state.quotee);
+    return (
+      <div className="App">
+        <DisplayQuotes 
+         quotee={this.state.quotee}/>
+        <GenerateNewQuote SelectQuote={() => this.GetQuotee()}/>
+      </div>
+    )
+  
+      
+}
+}
